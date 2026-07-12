@@ -10,7 +10,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M3 Repository Setup** → repo structure, Docker Compose, README, CI skeleton
 
 ## Phase 2 — Data Engineering
-- [ ] **M4 Document Ingestion** — PDF, DOCX, TXT, HTML, CSV, PPTX extractors; metadata; versioning
+- [x] **M4 Document Ingestion** — PDF, DOCX, TXT, HTML, CSV, PPTX extractors; metadata; versioning → `docs/04-document-ingestion.md`
 - [ ] **M5 OCR Pipeline** — scanned PDFs, images, receipts, invoices; layout + table extraction
 - [ ] **M6 Data Cleaning** — text cleaning, header/footer removal, dedup, normalization
 - [ ] **M7 Chunking Engine** — semantic, recursive, token-based, metadata chunking + validator
