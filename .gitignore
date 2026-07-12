@@ -1,0 +1,32 @@
+# env & secrets
+.env
+*.pem
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+*.egg-info/
+
+# node
+node_modules/
+frontend/dist/
+frontend/build/
+
+# data & artifacts
+data/
+*.log
+.coverage
+htmlcov/
+
+# os / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
