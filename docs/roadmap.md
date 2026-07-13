@@ -27,7 +27,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M14 GraphRAG** — graph + vector hybrid retrieval → `docs/14-graphrag.md`
 
 ## Phase 5 — AI Layer
-- [ ] **M15 Prompt Engineering** — templates, context formatting, citations, structured output
+- [x] **M15 Prompt Engineering** — templates, context formatting, citations, structured output → `docs/15-prompt-engineering.md`
 - [ ] **M16 Multi-Agent System** — HR, Finance, Research, Developer, Legal, Operations agents
 - [ ] **M17 Memory System** — conversation, long-term, user, project memory
 
