@@ -11,6 +11,7 @@ from app.retrieval.base import RetrievalResult, RetrievedChunk, Retriever
 from app.retrieval.bm25 import BM25Index
 from app.retrieval.dense import DenseRetriever
 from app.retrieval.fusion import reciprocal_rank_fusion
+from app.retrieval.graphrag import GraphRAGRetriever
 from app.retrieval.hybrid import HybridRetriever
 from app.retrieval.rerank import (
     CohereReranker,
@@ -25,6 +26,7 @@ __all__ = [
     "CohereReranker",
     "CrossEncoderReranker",
     "DenseRetriever",
+    "GraphRAGRetriever",
     "HybridRetriever",
     "LexicalReranker",
     "RerankedRetriever",

@@ -24,7 +24,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M11 Semantic Search** — dense retrieval, similarity search, Retriever API → `docs/11-semantic-search.md`
 - [x] **M12 Hybrid Search** — BM25 + vectors + metadata filters + RRF → `docs/12-hybrid-search.md`
 - [x] **M13 Reranking** — cross-encoder, Cohere Rerank → `docs/13-reranking.md`
-- [ ] **M14 GraphRAG** — graph + vector hybrid retrieval
+- [x] **M14 GraphRAG** — graph + vector hybrid retrieval → `docs/14-graphrag.md`
 
 ## Phase 5 — AI Layer
 - [ ] **M15 Prompt Engineering** — templates, context formatting, citations, structured output
