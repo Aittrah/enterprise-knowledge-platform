@@ -8,6 +8,7 @@ from app.ingestion.extractors.base import BaseExtractor, ExtractionError
 from app.ingestion.extractors.csv import CsvExtractor
 from app.ingestion.extractors.docx import DocxExtractor
 from app.ingestion.extractors.html import HtmlExtractor
+from app.ingestion.extractors.image import ImageExtractor
 from app.ingestion.extractors.pdf import PdfExtractor
 from app.ingestion.extractors.pptx import PptxExtractor
 from app.ingestion.extractors.txt import TxtExtractor
@@ -25,6 +26,7 @@ _EXTRACTOR_CLASSES: tuple[type[BaseExtractor], ...] = (
     HtmlExtractor,
     CsvExtractor,
     PptxExtractor,
+    ImageExtractor,
 )
 
 _REGISTRY: dict[str, BaseExtractor] = {

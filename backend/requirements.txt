@@ -6,6 +6,11 @@ lxml>=5.0
 python-pptx>=1.0
 charset-normalizer>=3.3
 
+# Milestone 5 — OCR (also requires the Tesseract binary at runtime)
+pillow>=10.0
+pytesseract>=0.3.10
+pypdfium2>=4.30
+
 # dev / test
 pytest>=8.0
 ruff>=0.6
