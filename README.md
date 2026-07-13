@@ -54,7 +54,8 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M2 Architecture — [docs/02-architecture.md](docs/02-architecture.md)
 - [x] M3 Repository setup
 - [x] M4 Document ingestion — [docs/04-document-ingestion.md](docs/04-document-ingestion.md)
-- [ ] M5–M7 Data engineering (OCR, cleaning, chunking)
+- [x] M5 OCR pipeline — [docs/05-ocr-pipeline.md](docs/05-ocr-pipeline.md)
+- [ ] M6–M7 Data engineering (cleaning, chunking)
 - [ ] M8–M10 Knowledge base (embeddings, vector DB, knowledge graph)
 - [ ] M11–M14 Retrieval (semantic, hybrid, rerank, GraphRAG)
 - [ ] M15–M17 AI layer (prompts, multi-agent, memory)
