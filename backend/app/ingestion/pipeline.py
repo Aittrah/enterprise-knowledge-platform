@@ -1,6 +1,6 @@
-"""Ingestion pipeline: extract -> metadata -> version registration.
+"""Ingestion pipeline: extract -> OCR fallback -> clean -> metadata ->
 
-Cleaning (M6), chunking (M7), and embedding (M8) attach after this stage.
+version registration. Chunking (M7) and embedding (M8) attach after this.
 """
 
 from __future__ import annotations
@@ -13,6 +13,7 @@ from app.ingestion.metadata import generate_metadata
 from app.ingestion.models import DocumentMetadata, ExtractedDocument, VersionInfo
 from app.ingestion.ocr.pipeline import OcrPipeline
 from app.ingestion.versioning import VersionTracker
+from app.processing.cleaner import CleaningPipeline
 
 
 @dataclass
@@ -33,16 +34,22 @@ class IngestionPipeline:
         version_store: Path,
         ocr: OcrPipeline | None = None,
         ocr_scanned_pdfs: bool = True,
+        cleaner: CleaningPipeline | None = None,
+        clean: bool = True,
     ) -> None:
         self._versions = VersionTracker(version_store)
         self._ocr = ocr or OcrPipeline()
         self._ocr_scanned_pdfs = ocr_scanned_pdfs
+        self._cleaner = cleaner or CleaningPipeline()
+        self._clean = clean
 
     def ingest(self, path: Path | str, document_key: str | None = None) -> IngestionResult:
         path = Path(path)
         document = extract(path)
         if self._ocr_scanned_pdfs and any("route to OCR" in w for w in document.warnings):
             document = self._recover_scanned_pdf(path, document)
+        if self._clean:
+            self._cleaner.clean(document)
         metadata = generate_metadata(path, document)
         version = self._versions.register(document_key or path.name, metadata.sha256)
         metadata.extra["version"] = version.version
