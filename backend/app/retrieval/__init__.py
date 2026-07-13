@@ -8,6 +8,17 @@ composes them without caring which strategy is active.
 """
 
 from app.retrieval.base import RetrievalResult, RetrievedChunk, Retriever
+from app.retrieval.bm25 import BM25Index
 from app.retrieval.dense import DenseRetriever
+from app.retrieval.fusion import reciprocal_rank_fusion
+from app.retrieval.hybrid import HybridRetriever
 
-__all__ = ["DenseRetriever", "RetrievalResult", "RetrievedChunk", "Retriever"]
+__all__ = [
+    "BM25Index",
+    "DenseRetriever",
+    "HybridRetriever",
+    "RetrievalResult",
+    "RetrievedChunk",
+    "Retriever",
+    "reciprocal_rank_fusion",
+]
