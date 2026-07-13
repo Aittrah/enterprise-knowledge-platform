@@ -11,6 +11,10 @@ pillow>=10.0
 pytesseract>=0.3.10
 pypdfium2>=4.30
 
+# Milestone 8 — embeddings
+httpx>=0.27
+# optional local models: pip install sentence-transformers
+
 # dev / test
 pytest>=8.0
 ruff>=0.6

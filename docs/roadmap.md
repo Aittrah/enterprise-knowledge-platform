@@ -16,7 +16,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M7 Chunking Engine** — semantic, recursive, token-based, metadata chunking + validator → `docs/07-chunking-engine.md`
 
 ## Phase 3 — Knowledge Base
-- [ ] **M8 Embedding Pipeline** — OpenAI, BGE, E5, Voyage, Cohere adapters + cache
+- [x] **M8 Embedding Pipeline** — OpenAI, BGE, E5, Voyage, Cohere adapters + cache → `docs/08-embedding-pipeline.md`
 - [ ] **M9 Vector Database** — Qdrant + PostgreSQL/pgvector storage
 - [ ] **M10 Knowledge Graph** — entity extraction, relation detection, Neo4j, visualization
 

@@ -57,7 +57,8 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M5 OCR pipeline — [docs/05-ocr-pipeline.md](docs/05-ocr-pipeline.md)
 - [x] M6 Data cleaning — [docs/06-data-cleaning.md](docs/06-data-cleaning.md)
 - [x] M7 Chunking engine — [docs/07-chunking-engine.md](docs/07-chunking-engine.md) *(Phase 2 complete)*
-- [ ] M8–M10 Knowledge base (embeddings, vector DB, knowledge graph)
+- [x] M8 Embedding pipeline — [docs/08-embedding-pipeline.md](docs/08-embedding-pipeline.md)
+- [ ] M9–M10 Knowledge base (vector DB, knowledge graph)
 - [ ] M11–M14 Retrieval (semantic, hybrid, rerank, GraphRAG)
 - [ ] M15–M17 AI layer (prompts, multi-agent, memory)
 - [ ] M18–M19 Backend + Frontend
