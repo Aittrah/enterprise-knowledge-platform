@@ -21,7 +21,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M10 Knowledge Graph** — entity extraction, relation detection, Neo4j, visualization → `docs/10-knowledge-graph.md`
 
 ## Phase 4 — Retrieval System
-- [ ] **M11 Semantic Search** — dense retrieval, similarity search, Retriever API
+- [x] **M11 Semantic Search** — dense retrieval, similarity search, Retriever API → `docs/11-semantic-search.md`
 - [ ] **M12 Hybrid Search** — BM25 + vectors + metadata filters + RRF
 - [ ] **M13 Reranking** — cross-encoder, Cohere Rerank
 - [ ] **M14 GraphRAG** — graph + vector hybrid retrieval
