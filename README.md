@@ -60,8 +60,8 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M8 Embedding pipeline — [docs/08-embedding-pipeline.md](docs/08-embedding-pipeline.md)
 - [x] M9 Vector database — [docs/09-vector-database.md](docs/09-vector-database.md)
 - [x] M10 Knowledge graph — [docs/10-knowledge-graph.md](docs/10-knowledge-graph.md) *(Phase 3 complete)*
-- [ ] M11–M14 Retrieval (semantic, hybrid, rerank, GraphRAG)
-- [ ] M11–M14 Retrieval (semantic, hybrid, rerank, GraphRAG)
+- [x] M11 Semantic search — [docs/11-semantic-search.md](docs/11-semantic-search.md)
+- [ ] M12–M14 Retrieval (hybrid, rerank, GraphRAG)
 - [ ] M15–M17 AI layer (prompts, multi-agent, memory)
 - [ ] M18–M19 Backend + Frontend
 - [ ] M20 Guardrails · M21 UI/UX enhancement · M22 Evaluation · M23 Observability
