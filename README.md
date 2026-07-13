@@ -63,7 +63,7 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M11 Semantic search — [docs/11-semantic-search.md](docs/11-semantic-search.md)
 - [x] M12 Hybrid search — [docs/12-hybrid-search.md](docs/12-hybrid-search.md)
 - [x] M13 Reranking — [docs/13-reranking.md](docs/13-reranking.md)
-- [ ] M14 GraphRAG
+- [x] M14 GraphRAG — [docs/14-graphrag.md](docs/14-graphrag.md) *(Phase 4 complete)*
 - [ ] M15–M17 AI layer (prompts, multi-agent, memory)
 - [ ] M18–M19 Backend + Frontend
 - [ ] M20 Guardrails · M21 UI/UX enhancement · M22 Evaluation · M23 Observability
