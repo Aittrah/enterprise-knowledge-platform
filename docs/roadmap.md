@@ -18,7 +18,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 ## Phase 3 — Knowledge Base
 - [x] **M8 Embedding Pipeline** — OpenAI, BGE, E5, Voyage, Cohere adapters + cache → `docs/08-embedding-pipeline.md`
 - [x] **M9 Vector Database** — Qdrant + PostgreSQL/pgvector storage → `docs/09-vector-database.md`
-- [ ] **M10 Knowledge Graph** — entity extraction, relation detection, Neo4j, visualization
+- [x] **M10 Knowledge Graph** — entity extraction, relation detection, Neo4j, visualization → `docs/10-knowledge-graph.md`
 
 ## Phase 4 — Retrieval System
 - [ ] **M11 Semantic Search** — dense retrieval, similarity search, Retriever API
