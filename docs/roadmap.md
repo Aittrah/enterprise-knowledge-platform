@@ -23,7 +23,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 ## Phase 4 — Retrieval System
 - [x] **M11 Semantic Search** — dense retrieval, similarity search, Retriever API → `docs/11-semantic-search.md`
 - [x] **M12 Hybrid Search** — BM25 + vectors + metadata filters + RRF → `docs/12-hybrid-search.md`
-- [ ] **M13 Reranking** — cross-encoder, Cohere Rerank
+- [x] **M13 Reranking** — cross-encoder, Cohere Rerank → `docs/13-reranking.md`
 - [ ] **M14 GraphRAG** — graph + vector hybrid retrieval
 
 ## Phase 5 — AI Layer

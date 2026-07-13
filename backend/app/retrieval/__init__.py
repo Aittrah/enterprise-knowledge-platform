@@ -12,11 +12,23 @@ from app.retrieval.bm25 import BM25Index
 from app.retrieval.dense import DenseRetriever
 from app.retrieval.fusion import reciprocal_rank_fusion
 from app.retrieval.hybrid import HybridRetriever
+from app.retrieval.rerank import (
+    CohereReranker,
+    CrossEncoderReranker,
+    LexicalReranker,
+    RerankedRetriever,
+    Reranker,
+)
 
 __all__ = [
     "BM25Index",
+    "CohereReranker",
+    "CrossEncoderReranker",
     "DenseRetriever",
     "HybridRetriever",
+    "LexicalReranker",
+    "RerankedRetriever",
+    "Reranker",
     "RetrievalResult",
     "RetrievedChunk",
     "Retriever",
