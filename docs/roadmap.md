@@ -12,7 +12,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 ## Phase 2 — Data Engineering
 - [x] **M4 Document Ingestion** — PDF, DOCX, TXT, HTML, CSV, PPTX extractors; metadata; versioning → `docs/04-document-ingestion.md`
 - [x] **M5 OCR Pipeline** — scanned PDFs, images, receipts, invoices; layout + table extraction → `docs/05-ocr-pipeline.md`
-- [ ] **M6 Data Cleaning** — text cleaning, header/footer removal, dedup, normalization
+- [x] **M6 Data Cleaning** — text cleaning, header/footer removal, dedup, normalization → `docs/06-data-cleaning.md`
 - [ ] **M7 Chunking Engine** — semantic, recursive, token-based, metadata chunking + validator
 
 ## Phase 3 — Knowledge Base
