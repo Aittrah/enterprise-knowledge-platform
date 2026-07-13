@@ -30,11 +30,13 @@ class KnowledgeBaseIndexer:
         embeddings: EmbeddingService,
         generator: ChunkGenerator | None = None,
         validator: ChunkValidator | None = None,
+        text_index=None,  # optional BM25Index (M12); mirrors upsert/delete
     ) -> None:
         self._store = store
         self._embeddings = embeddings
         self._generator = generator or ChunkGenerator()
         self._validator = validator or ChunkValidator()
+        self._text_index = text_index
 
     def index(
         self, document: ExtractedDocument, metadata: DocumentMetadata
@@ -55,12 +57,14 @@ class KnowledgeBaseIndexer:
         )
         self._store.delete_by_filter({"source": metadata.filename})
 
-        self._store.upsert(
-            [
-                VectorRecord(id=c.id, vector=v, text=c.text, metadata=c.metadata)
-                for c, v in zip(chunks, vectors)
-            ]
-        )
+        records = [
+            VectorRecord(id=c.id, vector=v, text=c.text, metadata=c.metadata)
+            for c, v in zip(chunks, vectors)
+        ]
+        self._store.upsert(records)
+        if self._text_index is not None:
+            self._text_index.delete_by_filter({"source": metadata.filename})
+            self._text_index.upsert(records)
         return IndexReport(
             source=metadata.filename,
             chunks_indexed=len(chunks),
