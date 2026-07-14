@@ -24,6 +24,7 @@ from app.embeddings import EmbeddingService, create_provider
 from app.graph import GraphBuilder, InMemoryGraphStore
 from app.ingestion import IngestionPipeline
 from app.memory import MemoryService
+from app.observability import MetricsRegistry, estimate_cost
 from app.retrieval import BM25Index, GraphRAGRetriever, HybridRetriever
 from app.stores import InMemoryVectorStore, KnowledgeBaseIndexer, QdrantVectorStore
 
@@ -75,12 +76,14 @@ class AppState:
         self.pipeline = IngestionPipeline(data / "versions.json")
 
         self._lock = threading.Lock()
+        self.metrics = MetricsRegistry()
         self.documents: dict[str, dict] = {}
         self.jobs: dict[str, dict] = {}
         self.stats = {
             "queries": 0,
             "prompt_tokens": 0,
             "completion_tokens": 0,
+            "cost_usd": 0.0,
             "by_agent": {},
         }
 
@@ -156,11 +159,20 @@ class AppState:
         }
         convo.add("assistant", answer.text)
 
+        cost = estimate_cost(
+            getattr(self.llm, "model", "unknown"),
+            answer.prompt_tokens,
+            answer.completion_tokens,
+        )
         with self._lock:
             self.stats["queries"] += 1
             self.stats["prompt_tokens"] += answer.prompt_tokens
             self.stats["completion_tokens"] += answer.completion_tokens
+            self.stats["cost_usd"] = round(self.stats["cost_usd"] + cost["usd"], 6)
             self.stats["by_agent"][answer.agent_id] = (
                 self.stats["by_agent"].get(answer.agent_id, 0) + 1
             )
+        self.metrics.increment("ekip_queries_total", labels={"agent": answer.agent_id})
+        self.metrics.observe("ekip_retrieval_ms", answer.retrieval_ms)
+        self.metrics.increment("ekip_tokens_total", answer.prompt_tokens + answer.completion_tokens)
         return answer, conversation_id

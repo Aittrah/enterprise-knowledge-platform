@@ -46,8 +46,8 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [ ] Final UI review report
 
 ## Phase 8 — Evaluation
-- [ ] **M22 Evaluation Framework** — precision/recall, faithfulness, hallucination rate, latency, cost
-- [ ] **M23 Monitoring & Observability** — logging, metrics, tracing, token/cost tracking
+- [x] **M22 Evaluation Framework** — precision/recall, faithfulness, hallucination rate, latency, cost → `docs/22-evaluation-framework.md`
+- [x] **M23 Monitoring & Observability** — logging, metrics, tracing, token/cost tracking → `docs/22-evaluation-framework.md`
 
 ## Phase 9 — Deployment
 - [ ] **M24 CI/CD** — GitHub Actions, Docker builds, automated tests + deploy
