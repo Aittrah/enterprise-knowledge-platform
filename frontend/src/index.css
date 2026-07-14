@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* Module 21 design tokens (provisional until design approval) */
+@theme {
+  --color-surface-0: #0c1220;
+  --color-surface-1: #131b2c;
+  --color-surface-2: #1a2438;
+  --color-ink: #e8ebea;
+  --color-ink-muted: #8a93a6;
+  --color-verdigris: #2e9e83;
+  --color-verdigris-bright: #3cc9a7;
+  --color-marginalia: #e0a458;
+  --color-signal: #e5484d;
+  --font-display: "Source Serif 4", Georgia, serif;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+body {
+  @apply bg-surface-0 text-ink font-sans antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-verdigris) 40%, transparent);
+}
+
+.card {
+  @apply bg-surface-1 border border-white/8 rounded-[10px];
+}
+
+.focusable {
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verdigris;
+}

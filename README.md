@@ -67,7 +67,8 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M15 Prompt engineering — [docs/15-prompt-engineering.md](docs/15-prompt-engineering.md)
 - [x] M16 Multi-agent system — [docs/16-multi-agent-system.md](docs/16-multi-agent-system.md)
 - [x] M17 Memory system — [docs/17-memory-system.md](docs/17-memory-system.md) *(Phase 5 complete)*
-- [ ] M18–M19 Backend + Frontend
+- [x] M18 FastAPI backend — [docs/18-fastapi-backend.md](docs/18-fastapi-backend.md)
+- [x] M19 React frontend — [docs/19-frontend.md](docs/19-frontend.md) *(Phase 6 complete)*
 - [ ] M20 Guardrails · M21 UI/UX enhancement · M22 Evaluation · M23 Observability
 - [ ] M24–M25 CI/CD, cloud deployment, documentation
 
