@@ -32,7 +32,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M17 Memory System** — conversation, long-term, user, project memory → `docs/17-memory-system.md`
 
 ## Phase 6 — Application
-- [ ] **M18 FastAPI Backend** — auth, REST, WebSockets, background workers
+- [x] **M18 FastAPI Backend** — auth, REST, WebSockets, background workers → `docs/18-fastapi-backend.md`
 - [ ] **M19 Frontend** — React, TypeScript, Tailwind, streaming chat, uploads, analytics
 
 ## Phase 7 — Security

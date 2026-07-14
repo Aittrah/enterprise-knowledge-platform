@@ -41,7 +41,9 @@ def _now() -> str:
 class MemoryStore:
     def __init__(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        self._conn = sqlite3.connect(str(path))
+        # FastAPI serves sync endpoints from a threadpool; SQLite's default
+        # thread pinning would reject those calls. sqlite3 serializes access.
+        self._conn = sqlite3.connect(str(path), check_same_thread=False)
         self._conn.executescript(
             """
             CREATE TABLE IF NOT EXISTS messages (
