@@ -121,13 +121,13 @@ export default function Chat() {
   return (
     <div className="flex h-screen">
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="px-6 py-3 border-b border-white/8 flex items-center gap-3">
+        <div className="px-6 py-3 border-b border-edge flex items-center gap-3">
           <label htmlFor="agent" className="text-xs text-ink-muted">
             Agent
           </label>
           <select
             id="agent"
-            className="focusable bg-surface-1 border border-white/10 rounded-lg text-sm px-3 py-1.5"
+            className="focusable bg-surface-1 border border-edge rounded-lg text-sm px-3 py-1.5"
             value={agentId}
             onChange={(e) => setAgentId(e.target.value)}
           >
@@ -161,13 +161,13 @@ export default function Chat() {
           )}
           {messages.map((message, index) =>
             message.role === "user" ? (
-              <div key={index} className="flex justify-end">
-                <div className="bg-verdigris/15 border border-verdigris/25 rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] text-[15px]">
+              <div key={index} className="flex justify-end anim-fade-up">
+                <div className="bg-verdigris-soft border border-edge rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] text-[15px]">
                   {message.text}
                 </div>
               </div>
             ) : (
-              <div key={index} className="max-w-[90%]">
+              <div key={index} className="max-w-[90%] anim-fade-up">
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="font-mono text-[11px] text-ink-muted uppercase">
                     {message.agentId ?? "agent"}
@@ -200,17 +200,17 @@ export default function Chat() {
           <div ref={bottomRef} />
         </div>
 
-        <form onSubmit={send} className="p-4 border-t border-white/8">
+        <form onSubmit={send} className="p-4 border-t border-edge">
           <div className="flex gap-3">
             <input
-              className="focusable flex-1 bg-surface-1 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-ink-muted/60"
+              className="focusable flex-1 bg-surface-1 border border-edge rounded-xl px-4 py-3 text-sm placeholder:text-ink-muted/60"
               placeholder="Ask about your documents…"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               disabled={busy}
             />
             <button
-              className="focusable bg-verdigris hover:bg-verdigris-bright text-surface-0 font-medium rounded-xl px-5 text-sm transition-colors disabled:opacity-50"
+              className="btn-primary rounded-xl px-5 text-sm disabled:opacity-50"
               disabled={busy || !input.trim()}
             >
               Send
@@ -220,8 +220,8 @@ export default function Chat() {
       </div>
 
       {/* Provenance rail — the signature element (Module 21) */}
-      <aside className="w-80 shrink-0 border-l border-white/8 bg-surface-1 overflow-y-auto hidden xl:block">
-        <div className="px-5 py-4 border-b border-white/8">
+      <aside className="w-80 shrink-0 border-l border-edge bg-surface-1 overflow-y-auto hidden xl:block">
+        <div className="px-5 py-4 border-b border-edge">
           <h2 className="text-xs uppercase tracking-wider text-ink-muted">Provenance</h2>
         </div>
         {lastCitations.length === 0 ? (
@@ -231,12 +231,12 @@ export default function Chat() {
         ) : (
           <ul className="p-4 space-y-3">
             {lastCitations.map((citation) => (
-              <li key={citation.n} className="card p-3.5 border-marginalia/20">
+              <li key={citation.n} className="card p-3.5 border-marginalia/20 anim-fade-up">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[12px] text-marginalia">
                     [{citation.n}]
                   </span>
-                  <span className="font-mono text-[11px] text-verdigris-bright">
+                  <span className="font-mono text-[11px] text-verdigris">
                     ◉ {(citation.score * 100).toFixed(0)}%
                   </span>
                 </div>

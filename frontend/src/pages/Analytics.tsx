@@ -38,7 +38,7 @@ export default function Analytics() {
   return (
     <div className="pb-10">
       <PageHeader title="Analytics" sub="Usage, cost signals and system health." />
-      <div className="px-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="px-8 grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
         <StatCard label="Queries" value={summary?.queries ?? "—"} />
         <StatCard
           label="Prompt tokens"
@@ -54,7 +54,7 @@ export default function Analytics() {
           hint="hit rate — cached embeddings cost nothing"
         />
       </div>
-      <div className="px-8 mt-6 grid lg:grid-cols-2 gap-4">
+      <div className="px-8 mt-6 grid lg:grid-cols-2 gap-4 stagger">
         <section className="card p-5">
           <h2 className="text-sm text-ink-muted uppercase tracking-wider mb-4">
             Queries by agent
@@ -64,24 +64,24 @@ export default function Analytics() {
           ) : (
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={agentData}>
-                <CartesianGrid stroke="#1a2438" vertical={false} />
+                <CartesianGrid stroke="var(--color-edge)" vertical={false} />
                 <XAxis
                   dataKey="agent"
-                  stroke="#8a93a6"
+                  stroke="var(--color-ink-muted)"
                   fontSize={12}
                   tickLine={false}
                 />
-                <YAxis stroke="#8a93a6" fontSize={12} tickLine={false} allowDecimals={false} />
+                <YAxis stroke="var(--color-ink-muted)" fontSize={12} tickLine={false} allowDecimals={false} />
                 <Tooltip
-                  cursor={{ fill: "rgba(255,255,255,0.04)" }}
+                  cursor={{ fill: "var(--color-hover)" }}
                   contentStyle={{
-                    background: "#131b2c",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "var(--color-surface-1)",
+                    border: "1px solid var(--color-edge)",
                     borderRadius: 8,
-                    color: "#e8ebea",
+                    color: "var(--color-ink)",
                   }}
                 />
-                <Bar dataKey="queries" fill="#2e9e83" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="queries" fill="var(--color-verdigris)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -109,7 +109,7 @@ export default function Analytics() {
             </div>
           </dl>
           {summary && (
-            <div className="mt-5 pt-4 border-t border-white/8 font-mono text-[12px] text-ink-muted space-y-1">
+            <div className="mt-5 pt-4 border-t border-edge font-mono text-[12px] text-ink-muted space-y-1">
               <div>embedding: {summary.providers.embedding}</div>
               <div>llm: {summary.providers.llm}</div>
               <div>vector store: {summary.providers.vector_store}</div>

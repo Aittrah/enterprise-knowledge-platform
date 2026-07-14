@@ -121,3 +121,29 @@ Sidebar · TopNav · ChatWindow · MessageBubble · CitationTag + ProvenanceRail
 - *Watch item:* the provenance thread animation must degrade to a simple highlight under `prefers-reduced-motion` and on mobile (rail becomes a bottom sheet).
 
 **Next step per Module 21 workflow:** review this direction → approve or give feedback (screenshots/inspiration welcome) → then per-screen wireframe review before React implementation at Milestone 19.
+
+---
+
+# Revision v2 — after first design feedback (2026-07-14)
+
+**Feedback received:** no blue anywhere; add document-type iconography to upload; add motion; reference Google and Microsoft design practice.
+
+**Research applied:** Material 3 Expressive (strategic accent color for hierarchy, spring-based purposeful motion, containment) and Fluent 2 (light neutral surfaces to create hierarchy, key+ambient dual shadows, short consistent motion durations).
+
+## Token changes (v2, shipped)
+
+| Token | v1 (dark blue-slate) | v2 (light-first warm neutral) |
+|---|---|---|
+| surface-0 | `#0C1220` deep archive blue | `#FAF9F7` warm paper *(dark: `#1B1A19` neutral, not blue)* |
+| accent | verdigris `#2E9E83` | verdigris `#0E7A63` — teal-green, explicitly **no blue** in any theme |
+| elevation | hairline borders | Fluent-style key+ambient shadows (light); borders (dark) |
+| themes | dark only | **light default + dark toggle**, tokens swap via `data-theme` |
+
+Typography trio unchanged (Source Serif 4 / Instrument Sans / IBM Plex Mono). Provenance rail and groundedness seal unchanged — they are the signature.
+
+## New in v2
+
+- **File-type icon system** (`FileIcon.tsx`): Drive-style glyphs, one color per format — PDF red, DOC teal, PPT orange, CSV green, IMG purple, none blue.
+- **Upload zone**: large floating document glyph (dashed outline), springs (`pop`) on drag-over, per-file shimmer while indexing.
+- **Motion system**: `fade-up` entrances (staggered on card grids), spring `pop` (cubic-bezier 0.34/1.56), shimmer skeletons, card hover lift; all disabled under `prefers-reduced-motion`.
+- **Profile editing**: name/email/password change in Settings (PATCH /api/auth/me).

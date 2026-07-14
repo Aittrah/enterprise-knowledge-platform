@@ -80,6 +80,37 @@ class UserStore:
             raise KeyError(f"no user {user_id}")
         return User(*row)
 
+    def update_profile(
+        self, user_id: int, email: str | None = None, name: str | None = None
+    ) -> User:
+        if email:
+            try:
+                self._conn.execute(
+                    "UPDATE users SET email = ? WHERE id = ?",
+                    (email.strip().lower(), user_id),
+                )
+            except sqlite3.IntegrityError:
+                raise UserExistsError(f"account already exists for {email}") from None
+        if name:
+            self._conn.execute(
+                "UPDATE users SET name = ? WHERE id = ?", (name.strip(), user_id)
+            )
+        self._conn.commit()
+        return self.get(user_id)
+
+    def change_password(self, user_id: int, current: str, new: str) -> bool:
+        row = self._conn.execute(
+            "SELECT password_hash FROM users WHERE id = ?", (user_id,)
+        ).fetchone()
+        if row is None or not verify_password(current, row[0]):
+            return False
+        self._conn.execute(
+            "UPDATE users SET password_hash = ? WHERE id = ?",
+            (hash_password(new), user_id),
+        )
+        self._conn.commit()
+        return True
+
     def list(self) -> list[User]:
         rows = self._conn.execute(
             "SELECT id, email, name, role, created_at FROM users ORDER BY id"

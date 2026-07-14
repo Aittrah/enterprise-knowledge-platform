@@ -23,7 +23,7 @@ export default function Dashboard() {
         title={`${greeting}, ${user?.name?.split(" ")[0] ?? "there"}`}
         sub="Your knowledge base at a glance."
       />
-      <div className="px-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="px-8 grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
         <StatCard label="Documents" value={summary?.documents ?? "—"} />
         <StatCard label="Indexed chunks" value={summary?.chunks ?? "—"} />
         <StatCard label="Queries" value={summary?.queries ?? "—"} />
@@ -33,7 +33,7 @@ export default function Dashboard() {
           hint={summary ? `LLM: ${summary.providers.llm}` : undefined}
         />
       </div>
-      <div className="px-8 mt-6 grid lg:grid-cols-2 gap-4">
+      <div className="px-8 mt-6 grid lg:grid-cols-2 gap-4 stagger">
         <section className="card p-5">
           <h2 className="text-sm text-ink-muted uppercase tracking-wider mb-4">
             Recent conversations
@@ -41,7 +41,7 @@ export default function Dashboard() {
           {conversations.length === 0 ? (
             <p className="text-ink-muted text-sm">
               None yet —{" "}
-              <Link to="/chat" className="focusable text-verdigris-bright">
+              <Link to="/chat" className="focusable text-verdigris">
                 start your first chat
               </Link>
               .
@@ -68,19 +68,19 @@ export default function Dashboard() {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/knowledge"
-              className="focusable bg-verdigris hover:bg-verdigris-bright text-surface-0 text-sm font-medium rounded-lg px-4 py-2.5 transition-colors"
+              className="btn-primary text-sm rounded-lg px-4 py-2.5"
             >
               Upload documents
             </Link>
             <Link
               to="/chat"
-              className="focusable border border-white/10 hover:border-verdigris/50 text-sm rounded-lg px-4 py-2.5 transition-colors"
+              className="focusable border border-edge hover:border-verdigris/60 text-sm rounded-lg px-4 py-2.5 transition-colors"
             >
               Ask a question
             </Link>
             <Link
               to="/graph"
-              className="focusable border border-white/10 hover:border-verdigris/50 text-sm rounded-lg px-4 py-2.5 transition-colors"
+              className="focusable border border-edge hover:border-verdigris/60 text-sm rounded-lg px-4 py-2.5 transition-colors"
             >
               Explore the graph
             </Link>
