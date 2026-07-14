@@ -24,7 +24,7 @@ def cache_key(provider: str, model: str, input_type: InputType, text: str) -> st
 class EmbeddingCache:
     def __init__(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        self._conn = sqlite3.connect(str(path))
+        self._conn = sqlite3.connect(str(path), check_same_thread=False)
         self._conn.execute(
             "CREATE TABLE IF NOT EXISTS embeddings ("
             " key TEXT PRIMARY KEY, dimension INTEGER NOT NULL, vector BLOB NOT NULL)"
