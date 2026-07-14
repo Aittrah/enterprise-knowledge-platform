@@ -32,6 +32,8 @@ class AgentAnswer:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     retrieval_ms: float = 0.0
+    # Attached by the guardrail layer (M20) after generation.
+    guardrail: dict | None = None
 
     @property
     def grounded(self) -> bool:

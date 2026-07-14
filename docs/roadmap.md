@@ -36,7 +36,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M19 Frontend** — React, TypeScript, Tailwind, streaming chat, uploads, analytics → `docs/19-frontend.md`
 
 ## Phase 7 — Security
-- [ ] **M20 AI Guardrails** — injection/jailbreak detection, PII, citation verification, groundedness
+- [x] **M20 AI Guardrails** — injection/jailbreak detection, PII, citation verification, groundedness → `docs/20-ai-guardrails.md`
 
 ## Module 21 (added) — UI/UX Design Review & Professional Interface Enhancement
 - [ ] Design system + tokens → `docs/design/design-system.md`
