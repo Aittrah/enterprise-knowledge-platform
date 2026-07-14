@@ -64,7 +64,9 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M12 Hybrid search — [docs/12-hybrid-search.md](docs/12-hybrid-search.md)
 - [x] M13 Reranking — [docs/13-reranking.md](docs/13-reranking.md)
 - [x] M14 GraphRAG — [docs/14-graphrag.md](docs/14-graphrag.md) *(Phase 4 complete)*
-- [ ] M15–M17 AI layer (prompts, multi-agent, memory)
+- [x] M15 Prompt engineering — [docs/15-prompt-engineering.md](docs/15-prompt-engineering.md)
+- [x] M16 Multi-agent system — [docs/16-multi-agent-system.md](docs/16-multi-agent-system.md)
+- [x] M17 Memory system — [docs/17-memory-system.md](docs/17-memory-system.md) *(Phase 5 complete)*
 - [ ] M18–M19 Backend + Frontend
 - [ ] M20 Guardrails · M21 UI/UX enhancement · M22 Evaluation · M23 Observability
 - [ ] M24–M25 CI/CD, cloud deployment, documentation

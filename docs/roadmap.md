@@ -29,7 +29,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 ## Phase 5 — AI Layer
 - [x] **M15 Prompt Engineering** — templates, context formatting, citations, structured output → `docs/15-prompt-engineering.md`
 - [x] **M16 Multi-Agent System** — HR, Finance, Research, Developer, Legal, Operations agents → `docs/16-multi-agent-system.md`
-- [ ] **M17 Memory System** — conversation, long-term, user, project memory
+- [x] **M17 Memory System** — conversation, long-term, user, project memory → `docs/17-memory-system.md`
 
 ## Phase 6 — Application
 - [ ] **M18 FastAPI Backend** — auth, REST, WebSockets, background workers
