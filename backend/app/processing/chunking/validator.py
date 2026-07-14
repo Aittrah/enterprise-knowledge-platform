@@ -15,12 +15,16 @@ _REQUIRED_METADATA = ("source", "strategy")
 @dataclass
 class ValidationReport:
     ok: bool = True
-    issues: list[str] = field(default_factory=list)
+    issues: list[str] = field(default_factory=list)  # errors: block indexing
+    warnings: list[str] = field(default_factory=list)  # advisory only
     stats: dict = field(default_factory=dict)
 
     def add(self, issue: str) -> None:
         self.ok = False
         self.issues.append(issue)
+
+    def warn(self, warning: str) -> None:
+        self.warnings.append(warning)
 
 
 class ChunkValidator:
@@ -55,8 +59,10 @@ class ChunkValidator:
                 report.add(
                     f"{label}: {chunk.token_count} tokens exceeds limit {hard_limit}"
                 )
+            # Undersized chunks are a quality note, not a reason to reject a
+            # document — slide decks legitimately produce short fragments.
             if chunk.token_count < self.min_tokens and len(chunks) > 1:
-                report.add(f"{label}: only {chunk.token_count} tokens")
+                report.warn(f"{label}: only {chunk.token_count} tokens")
             for key in _REQUIRED_METADATA:
                 if not chunk.metadata.get(key):
                     report.add(f"{label}: missing metadata '{key}'")
