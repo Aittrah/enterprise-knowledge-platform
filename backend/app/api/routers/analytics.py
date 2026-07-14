@@ -18,6 +18,7 @@ def summary(state: AppState = Depends(get_state)) -> dict:
         "queries": state.stats["queries"],
         "prompt_tokens": state.stats["prompt_tokens"],
         "completion_tokens": state.stats["completion_tokens"],
+        "cost_usd": state.stats["cost_usd"],
         "queries_by_agent": state.stats["by_agent"],
         "graph": state.graph.stats(),
         "embedding_cache": {

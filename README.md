@@ -70,7 +70,8 @@ Development follows an incremental, milestone-per-branch workflow — see [docs/
 - [x] M18 FastAPI backend — [docs/18-fastapi-backend.md](docs/18-fastapi-backend.md)
 - [x] M19 React frontend — [docs/19-frontend.md](docs/19-frontend.md) *(Phase 6 complete)*
 - [x] M20 AI guardrails — [docs/20-ai-guardrails.md](docs/20-ai-guardrails.md) *(Phase 7 complete)*
-- [ ] M21 UI/UX enhancement (awaiting design approval) · M22 Evaluation · M23 Observability
+- [x] M22 Evaluation + M23 Observability — [docs/22-evaluation-framework.md](docs/22-evaluation-framework.md) *(Phase 8 complete)*
+- [ ] M21 UI/UX enhancement (awaiting design approval)
 - [ ] M24–M25 CI/CD, cloud deployment, documentation
 
 ## License
