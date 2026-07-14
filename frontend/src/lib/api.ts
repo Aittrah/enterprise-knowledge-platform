@@ -109,6 +109,13 @@ export const api = {
       body: JSON.stringify({ email, password }),
     }),
   me: () => request<User>("/api/auth/me"),
+  updateProfile: (body: {
+    email?: string;
+    name?: string;
+    current_password?: string;
+    new_password?: string;
+  }) =>
+    request<User>("/api/auth/me", { method: "PATCH", body: JSON.stringify(body) }),
 
   agents: () => request<AgentInfo[]>("/api/chat/agents"),
   chat: (question: string, agent_id?: string, conversation_id?: string) =>

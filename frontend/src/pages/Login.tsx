@@ -29,7 +29,7 @@ export default function Login() {
   }
 
   const input =
-    "focusable w-full bg-surface-0 border border-white/10 rounded-lg px-3.5 py-2.5 text-sm placeholder:text-ink-muted/60";
+    "focusable w-full bg-surface-1 border border-edge rounded-lg px-3.5 py-2.5 text-sm placeholder:text-ink-muted/60";
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
@@ -71,7 +71,7 @@ export default function Login() {
           />
           {error && <p className="text-signal text-sm">{error}</p>}
           <button
-            className="focusable w-full bg-verdigris hover:bg-verdigris-bright text-surface-0 font-medium rounded-lg py-2.5 text-sm transition-colors disabled:opacity-60"
+            className="btn-primary w-full rounded-lg py-2.5 text-sm disabled:opacity-60"
             disabled={busy}
           >
             {busy ? "Working…" : mode === "login" ? "Sign in" : "Create account"}
@@ -79,7 +79,7 @@ export default function Login() {
           <div className="pt-2 space-y-2">
             <button
               type="button"
-              className="focusable w-full border border-white/10 rounded-lg py-2.5 text-sm text-ink-muted"
+              className="focusable w-full border border-edge rounded-lg py-2.5 text-sm text-ink-muted"
               title="SSO is configured at deployment (Module 21)"
               disabled
             >
@@ -87,7 +87,7 @@ export default function Login() {
             </button>
             <button
               type="button"
-              className="focusable w-full border border-white/10 rounded-lg py-2.5 text-sm text-ink-muted"
+              className="focusable w-full border border-edge rounded-lg py-2.5 text-sm text-ink-muted"
               title="SSO is configured at deployment (Module 21)"
               disabled
             >
@@ -98,7 +98,7 @@ export default function Login() {
             {mode === "login" ? "No account yet?" : "Already registered?"}{" "}
             <button
               type="button"
-              className="focusable text-verdigris-bright"
+              className="focusable text-verdigris"
               onClick={() => setMode(mode === "login" ? "register" : "login")}
             >
               {mode === "login" ? "Create one" : "Sign in"}
@@ -106,7 +106,7 @@ export default function Login() {
           </p>
         </form>
       </div>
-      <div className="hidden lg:flex items-center justify-center bg-surface-1 border-l border-white/8 p-12">
+      <div className="hidden lg:flex items-center justify-center bg-surface-2 border-l border-edge p-12">
         <div className="max-w-md">
           <p className="font-display text-2xl leading-snug">
             Every answer traces back to its source.

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.api.deps import get_current_user, get_state, require_admin
-from app.api.schemas import LoginIn, RegisterIn, TokenOut, UserOut
+from app.api.schemas import LoginIn, RegisterIn, TokenOut, UpdateProfileIn, UserOut
 from app.api.state import AppState
 from app.api.users import User, UserExistsError
 from app.core.security import create_access_token
@@ -40,6 +40,28 @@ def login(body: LoginIn, state: AppState = Depends(get_state)) -> TokenOut:
 @router.get("/me", response_model=UserOut)
 def me(user: User = Depends(get_current_user)) -> UserOut:
     return UserOut(id=user.id, email=user.email, name=user.name, role=user.role)
+
+
+@router.patch("/me", response_model=UserOut)
+def update_me(
+    body: UpdateProfileIn,
+    user: User = Depends(get_current_user),
+    state: AppState = Depends(get_state),
+) -> UserOut:
+    if body.new_password:
+        if not body.current_password:
+            raise HTTPException(
+                status_code=400, detail="Current password is required to set a new one"
+            )
+        if not state.users.change_password(
+            user.id, body.current_password, body.new_password
+        ):
+            raise HTTPException(status_code=400, detail="Current password is incorrect")
+    try:
+        updated = state.users.update_profile(user.id, email=body.email, name=body.name)
+    except UserExistsError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
+    return UserOut(id=updated.id, email=updated.email, name=updated.name, role=updated.role)
 
 
 @router.get("/users", response_model=list[UserOut])

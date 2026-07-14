@@ -1,19 +1,49 @@
 @import "tailwindcss";
 
-/* Module 21 design tokens (provisional until design approval) */
+/* ---------------------------------------------------------------------------
+   EKIP design tokens v2 — light-first, warm neutrals, zero blue.
+   Grounded in Fluent 2 (neutral surfaces for hierarchy, key+ambient
+   shadows) and Material 3 Expressive (strategic accent color, springy
+   purposeful motion). Accent: deep teal-green. Citations: marginalia amber.
+--------------------------------------------------------------------------- */
 @theme {
-  --color-surface-0: #0c1220;
-  --color-surface-1: #131b2c;
-  --color-surface-2: #1a2438;
-  --color-ink: #e8ebea;
-  --color-ink-muted: #8a93a6;
-  --color-verdigris: #2e9e83;
-  --color-verdigris-bright: #3cc9a7;
-  --color-marginalia: #e0a458;
-  --color-signal: #e5484d;
+  --color-surface-0: #faf9f7; /* app background — warm paper */
+  --color-surface-1: #ffffff; /* cards */
+  --color-surface-2: #f1efec; /* insets, code, hover fills */
+  --color-ink: #201f1e;
+  --color-ink-muted: #6b6862;
+  --color-edge: #e6e3de; /* hairline borders */
+  --color-hover: #f4f2ef;
+  --color-verdigris: #0e7a63; /* primary accent — teal-green, not blue */
+  --color-verdigris-bright: #0a5f4d; /* emphasis / hover in light mode */
+  --color-verdigris-soft: #e2f2ed; /* tinted fills */
+  --color-marginalia: #9a6a00; /* citations, review states */
+  --color-marginalia-soft: #f7edd8;
+  --color-signal: #c4314b;
   --font-display: "Source Serif 4", Georgia, serif;
-  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-sans: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --shadow-card: 0 1px 2px rgb(32 31 30 / 0.06), 0 2px 8px rgb(32 31 30 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(32 31 30 / 0.08), 0 8px 24px rgb(32 31 30 / 0.12);
+}
+
+/* Dark mode: warm neutral darks (Fluent-style), still no blue. */
+:root[data-theme="dark"] {
+  --color-surface-0: #1b1a19;
+  --color-surface-1: #242322;
+  --color-surface-2: #2e2c2a;
+  --color-ink: #f3f2f0;
+  --color-ink-muted: #a7a29b;
+  --color-edge: #3a3835;
+  --color-hover: #2a2927;
+  --color-verdigris: #2eb894;
+  --color-verdigris-bright: #4cd2ae;
+  --color-verdigris-soft: #123b31;
+  --color-marginalia: #e0a458;
+  --color-marginalia-soft: #3a2f1a;
+  --color-signal: #f26c81;
+  --shadow-card: 0 0 0 1px rgb(255 255 255 / 0.04);
+  --shadow-lift: 0 8px 24px rgb(0 0 0 / 0.5);
 }
 
 body {
@@ -21,13 +51,128 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-verdigris) 40%, transparent);
+  background: color-mix(in srgb, var(--color-verdigris) 30%, transparent);
 }
 
 .card {
-  @apply bg-surface-1 border border-white/8 rounded-[10px];
+  @apply bg-surface-1 border border-edge rounded-xl;
+  box-shadow: var(--shadow-card);
+}
+
+.card-lift {
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+.card-lift:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
 }
 
 .focusable {
   @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verdigris;
+}
+
+.btn-primary {
+  @apply bg-verdigris text-white font-medium rounded-lg transition-all;
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verdigris;
+}
+.btn-primary:hover {
+  background: var(--color-verdigris-bright);
+}
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* ------------------------------- motion ---------------------------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float-doc {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.anim-fade-up {
+  animation: fade-up 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.anim-pop {
+  animation: pop 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.anim-float {
+  animation: float-doc 2.6s ease-in-out infinite;
+}
+.stagger > * {
+  animation: fade-up 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.stagger > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-2) 25%,
+    var(--color-hover) 50%,
+    var(--color-surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .anim-pop,
+  .anim-float,
+  .stagger > *,
+  .shimmer {
+    animation: none !important;
+  }
+  .card-lift,
+  .card-lift:hover {
+    transition: none;
+    transform: none;
+  }
 }

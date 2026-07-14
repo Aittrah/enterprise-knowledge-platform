@@ -3,13 +3,13 @@ import { api, GraphViz } from "../lib/api";
 import { EmptyState, PageHeader } from "../components/ui";
 
 const TYPE_COLORS: Record<string, string> = {
-  person: "#3cc9a7",
-  department: "#e0a458",
-  organization: "#7aa2f7",
-  document: "#8a93a6",
-  money: "#e5c07b",
-  date: "#c678dd",
-  email: "#56b6c2",
+  person: "#14a085",
+  department: "#e37400",
+  organization: "#8430ce",
+  document: "#8f8b84",
+  money: "#1e8e3e",
+  date: "#b3540e",
+  email: "#c2185b",
 };
 
 interface Placed {
@@ -105,7 +105,7 @@ export default function Graph() {
       />
       <div className="px-8 space-y-4">
         <input
-          className="focusable w-72 bg-surface-1 border border-white/10 rounded-lg px-3.5 py-2 text-sm placeholder:text-ink-muted/60"
+          className="focusable w-72 bg-surface-1 border border-edge rounded-lg px-3.5 py-2 text-sm placeholder:text-ink-muted/60"
           placeholder="Search nodes…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -129,7 +129,7 @@ export default function Graph() {
                       y1={a.y}
                       x2={b.x}
                       y2={b.y}
-                      stroke={active ? "#e0a458" : "#2a3550"}
+                      stroke={active ? "var(--color-marginalia)" : "var(--color-edge)"}
                       strokeWidth={active ? 1.5 : 0.7}
                     />
                   );
@@ -148,9 +148,9 @@ export default function Graph() {
                     >
                       <circle
                         r={6 + Math.min(10, node.degree * 1.5)}
-                        fill={TYPE_COLORS[node.type] ?? "#8a93a6"}
+                        fill={TYPE_COLORS[node.type] ?? "#8f8b84"}
                         fillOpacity={0.85}
-                        stroke={selected === node.id ? "#e8ebea" : "transparent"}
+                        stroke={selected === node.id ? "var(--color-ink)" : "transparent"}
                         strokeWidth={2}
                       />
                       <text
@@ -165,7 +165,7 @@ export default function Graph() {
                   );
                 })}
               </svg>
-              <div className="px-4 py-3 border-t border-white/8 flex flex-wrap gap-4">
+              <div className="px-4 py-3 border-t border-edge flex flex-wrap gap-4">
                 {Object.entries(TYPE_COLORS).map(([type, color]) => (
                   <span key={type} className="text-[11px] font-mono text-ink-muted">
                     <span

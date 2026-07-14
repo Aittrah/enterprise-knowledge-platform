@@ -229,3 +229,43 @@ def test_analytics_summary_tracks_activity(auth_client: TestClient):
     assert summary["queries"] == 1
     assert summary["queries_by_agent"].get("hr") == 1
     assert summary["providers"]["llm"] == "extractive-fallback"
+
+
+# --- profile editing (Module 21) --------------------------------------------------
+
+
+def test_update_profile_email_and_name(auth_client: TestClient):
+    body = auth_client.patch(
+        "/api/auth/me", json={"email": "new@ekip.dev", "name": "New Name"}
+    ).json()
+    assert body["email"] == "new@ekip.dev"
+    assert body["name"] == "New Name"
+    # old token still works; email change reflected in /me
+    assert auth_client.get("/api/auth/me").json()["email"] == "new@ekip.dev"
+
+
+def test_update_email_conflict_409(auth_client: TestClient, client: TestClient):
+    client.post(
+        "/api/auth/register",
+        json={"email": "taken@ekip.dev", "password": "longenough", "name": "B"},
+    )
+    response = auth_client.patch("/api/auth/me", json={"email": "taken@ekip.dev"})
+    assert response.status_code == 409
+
+
+def test_change_password_requires_correct_current(auth_client: TestClient):
+    bad = auth_client.patch(
+        "/api/auth/me",
+        json={"current_password": "wrong", "new_password": "brand-new-pass"},
+    )
+    assert bad.status_code == 400
+
+    ok = auth_client.patch(
+        "/api/auth/me",
+        json={"current_password": "s3cure-pass", "new_password": "brand-new-pass"},
+    )
+    assert ok.status_code == 200
+    login = auth_client.post(
+        "/api/auth/login", json={"email": "admin@ekip.dev", "password": "brand-new-pass"}
+    )
+    assert login.status_code == 200

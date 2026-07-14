@@ -16,6 +16,15 @@ class LoginIn(BaseModel):
     password: str
 
 
+class UpdateProfileIn(BaseModel):
+    email: str | None = Field(
+        default=None, min_length=5, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+    )
+    name: str | None = Field(default=None, min_length=1, max_length=80)
+    current_password: str | None = None
+    new_password: str | None = Field(default=None, min_length=8, max_length=128)
+
+
 class UserOut(BaseModel):
     id: int
     email: str

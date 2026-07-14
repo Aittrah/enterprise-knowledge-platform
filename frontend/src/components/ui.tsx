@@ -19,7 +19,7 @@ export function StatCard({
   hint?: string;
 }) {
   return (
-    <div className="card p-5">
+    <div className="card card-lift p-5">
       <div className="text-xs text-ink-muted uppercase tracking-wider">{label}</div>
       <div className="font-mono text-2xl mt-2">{value}</div>
       {hint && <div className="text-xs text-ink-muted mt-1">{hint}</div>}
@@ -49,8 +49,8 @@ export function Seal({ grounded }: { grounded: boolean }) {
       title={grounded ? "Grounded: every citation verified" : "Unverified answer"}
       className={`inline-flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded-full border ${
         grounded
-          ? "text-verdigris-bright border-verdigris/40 bg-verdigris/10"
-          : "text-marginalia border-marginalia/40 bg-marginalia/10"
+          ? "text-verdigris border-verdigris/40 bg-verdigris-soft"
+          : "text-marginalia border-marginalia/40 bg-marginalia-soft"
       }`}
     >
       ◉ {grounded ? "grounded" : "unverified"}
