@@ -13,7 +13,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from app.agents import AgentOrchestrator
+from app.agents.base import AgentAnswer
 from app.agents.llm import OpenAICompatibleClient
+from app.guardrails import GuardrailPipeline
+from app.guardrails.pipeline import REFUSAL_TEXT, input_verdict_dict
 from app.api.fallback import ExtractiveLLM
 from app.api.users import UserStore
 from app.core.config import Settings
@@ -67,6 +70,7 @@ class AppState:
         else:
             self.llm = ExtractiveLLM()
         self.orchestrator = AgentOrchestrator(self.retriever, self.llm)
+        self.guardrails = GuardrailPipeline()
 
         self.pipeline = IngestionPipeline(data / "versions.json")
 
@@ -125,7 +129,31 @@ class AppState:
         convo = self.memory.conversation(conversation_id)
         convo.add("user", question)
 
+        verdict = self.guardrails.screen_input(question)
+        if not verdict.allowed:
+            answer = AgentAnswer(
+                agent_id="guardrail",
+                question=question,
+                text=REFUSAL_TEXT,
+                guardrail={"input": input_verdict_dict(verdict), "blocked": True},
+            )
+            convo.add("assistant", answer.text)
+            with self._lock:
+                self.stats["queries"] += 1
+                self.stats["by_agent"]["guardrail"] = (
+                    self.stats["by_agent"].get("guardrail", 0) + 1
+                )
+            return answer, conversation_id
+
         answer = self.orchestrator.ask(question, agent_id=agent_id)
+        report = self.guardrails.screen_output(answer.text, answer.chunks)
+        if report.masked_text is not None:
+            answer.text = report.masked_text
+        answer.guardrail = {
+            "input": input_verdict_dict(verdict),
+            "output": report.to_dict(),
+            "blocked": False,
+        }
         convo.add("assistant", answer.text)
 
         with self._lock:

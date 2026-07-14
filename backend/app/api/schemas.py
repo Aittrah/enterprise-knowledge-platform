@@ -53,6 +53,7 @@ class ChatOut(BaseModel):
     retrieval_ms: float
     prompt_tokens: int
     completion_tokens: int
+    guardrail: dict | None = None
 
 
 class SearchIn(BaseModel):

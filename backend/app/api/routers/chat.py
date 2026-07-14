@@ -23,6 +23,7 @@ def _to_chat_out(answer, conversation_id: str) -> ChatOut:
         retrieval_ms=answer.retrieval_ms,
         prompt_tokens=answer.prompt_tokens,
         completion_tokens=answer.completion_tokens,
+        guardrail=answer.guardrail,
     )
 
 
