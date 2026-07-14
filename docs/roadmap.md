@@ -50,5 +50,5 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 - [x] **M23 Monitoring & Observability** — logging, metrics, tracing, token/cost tracking → `docs/22-evaluation-framework.md`
 
 ## Phase 9 — Deployment
-- [ ] **M24 CI/CD** — GitHub Actions, Docker builds, automated tests + deploy
-- [ ] **M25 Cloud Deployment + Documentation & Portfolio** — production deployment, full docs, demo video
+- [x] **M24 CI/CD** — GitHub Actions, Docker builds, automated tests + deploy → `docs/24-deployment.md`
+- [x] **M25 Cloud Deployment + Documentation & Portfolio** — deployment guide, full docs, portfolio notes → `docs/24-deployment.md`, `docs/25-portfolio-notes.md`
