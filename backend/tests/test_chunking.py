@@ -268,3 +268,54 @@ def test_full_pipeline_document_to_valid_chunks(sample_html: Path):
         chunks, document
     )
     assert report.ok, report.issues
+
+
+# --- regression: slide decks with tiny fragments (user-reported) ----------------
+
+
+def slide_title(text: str, pos: int) -> ExtractedElement:
+    return ExtractedElement(ElementType.SLIDE_TITLE, text, position=pos)
+
+
+def slide_body(text: str, pos: int) -> ExtractedElement:
+    return ExtractedElement(ElementType.SLIDE_BODY, text, position=pos)
+
+
+def test_tiny_slide_fragments_merge_into_neighbors():
+    document = ExtractedDocument(
+        source_path="deck.pptx",
+        file_type="pptx",
+        elements=[
+            slide_title("Chapter 3", 1),
+            slide_body("Overview of processes and threads in operating systems.", 1),
+            slide_title("Agenda", 2),
+            slide_body("Key topics", 2),  # 2-token fragment
+            slide_title("Summary", 3),
+            slide_body("Questions?", 3),  # 1-token fragment
+        ],
+    )
+    chunks = ChunkGenerator(strategy="semantic", min_chunk_tokens=8).generate(document)
+    assert chunks, "deck must produce chunks"
+    # tiny fragments were folded into neighbors, none survive alone
+    assert all(c.token_count >= 8 or len(chunks) == 1 for c in chunks)
+    assert "Questions?" in chunks[-1].text  # content preserved, not dropped
+
+
+def test_undersized_chunks_warn_but_do_not_block():
+    tiny = _chunk("six tokens only here now", 1)
+    normal = _chunk(HR_SENTENCE * 3, 0)
+    report = ChunkValidator(min_tokens=10).validate([normal, tiny])
+    assert report.ok  # indexing proceeds
+    assert any("only" in w for w in report.warnings)
+
+
+def test_pptx_end_to_end_indexes_despite_short_slides(tmp_path: Path, sample_pptx: Path):
+    from app.embeddings import EmbeddingService, create_provider
+    from app.ingestion import IngestionPipeline
+    from app.stores import InMemoryVectorStore, KnowledgeBaseIndexer
+
+    result = IngestionPipeline(tmp_path / "v.json").ingest(sample_pptx)
+    store = InMemoryVectorStore()
+    indexer = KnowledgeBaseIndexer(store, EmbeddingService(create_provider("hashing")))
+    report = indexer.index(result.document, result.metadata)
+    assert report.chunks_indexed >= 1
