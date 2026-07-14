@@ -33,7 +33,7 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 
 ## Phase 6 — Application
 - [x] **M18 FastAPI Backend** — auth, REST, WebSockets, background workers → `docs/18-fastapi-backend.md`
-- [ ] **M19 Frontend** — React, TypeScript, Tailwind, streaming chat, uploads, analytics
+- [x] **M19 Frontend** — React, TypeScript, Tailwind, streaming chat, uploads, analytics → `docs/19-frontend.md`
 
 ## Phase 7 — Security
 - [ ] **M20 AI Guardrails** — injection/jailbreak detection, PII, citation verification, groundedness
