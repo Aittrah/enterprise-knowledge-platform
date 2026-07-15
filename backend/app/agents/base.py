@@ -73,6 +73,7 @@ class Agent:
                 "chunk_id": chunk.id,
                 "heading_path": chunk.metadata.get("heading_path", []),
                 "score": chunk.score,
+                "excerpt": chunk.text[:220],
             }
             for number, chunk in citation_map.items()
             if number in set(_cited(reply.text))

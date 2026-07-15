@@ -15,6 +15,7 @@ export interface Citation {
   chunk_id: string;
   heading_path: string[];
   score: number;
+  excerpt?: string;
 }
 
 export interface ChatResponse {

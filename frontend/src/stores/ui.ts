@@ -13,7 +13,7 @@ function apply(theme: "light" | "dark") {
 export const useUi = create<UiState>()(
   persist(
     (set, get) => ({
-      theme: "light",
+      theme: "dark",
       toggleTheme: () => {
         const next = get().theme === "light" ? "dark" : "light";
         apply(next);
@@ -22,7 +22,7 @@ export const useUi = create<UiState>()(
     }),
     {
       name: "ekip-ui",
-      onRehydrateStorage: () => (state) => apply(state?.theme ?? "light"),
+      onRehydrateStorage: () => (state) => apply(state?.theme ?? "dark"),
     },
   ),
 );

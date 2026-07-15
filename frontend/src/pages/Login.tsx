@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { api, ApiError } from "../lib/api";
 import { useSession } from "../stores/session";
+import { DominoCascade } from "../components/ThreeD";
 
 export default function Login() {
   const signIn = useSession((s) => s.signIn);
@@ -98,7 +99,7 @@ export default function Login() {
             {mode === "login" ? "No account yet?" : "Already registered?"}{" "}
             <button
               type="button"
-              className="focusable text-verdigris"
+              className="focusable text-ink underline underline-offset-4"
               onClick={() => setMode(mode === "login" ? "register" : "login")}
             >
               {mode === "login" ? "Create one" : "Sign in"}
@@ -107,8 +108,9 @@ export default function Login() {
         </form>
       </div>
       <div className="hidden lg:flex items-center justify-center bg-surface-2 border-l border-edge p-12">
-        <div className="max-w-md">
-          <p className="font-display text-2xl leading-snug">
+        <div className="max-w-md w-full">
+          <DominoCascade />
+          <p className="font-display text-3xl leading-snug mt-2">
             Every answer traces back to its source.
           </p>
           <p className="text-ink-muted mt-4 text-sm leading-relaxed">

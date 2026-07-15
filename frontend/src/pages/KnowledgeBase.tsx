@@ -3,6 +3,7 @@ import { api, DocumentInfo } from "../lib/api";
 import { FileIcon } from "../components/FileIcon";
 import { UploadDocGlyph } from "../components/FileIcon";
 import { EmptyState, PageHeader } from "../components/ui";
+import { Chunking3D } from "../components/ThreeD";
 
 export default function KnowledgeBase() {
   const [documents, setDocuments] = useState<DocumentInfo[]>([]);
@@ -61,7 +62,7 @@ export default function KnowledgeBase() {
           aria-label="Upload documents"
           className={`focusable card border-2 border-dashed p-8 text-center cursor-pointer transition-all duration-200 ${
             dragging
-              ? "border-verdigris bg-verdigris-soft scale-[1.01]"
+              ? "border-ink bg-accent-soft scale-[1.01]"
               : "hover:border-ink-muted/40 hover:bg-hover"
           }`}
           onClick={() => fileInput.current?.click()}
@@ -81,10 +82,10 @@ export default function KnowledgeBase() {
             <UploadDocGlyph active={dragging} />
             <p className="text-sm">
               {dragging ? (
-                <span className="text-verdigris font-medium">Drop to upload</span>
+                <span className="text-ink font-medium">Drop to upload</span>
               ) : (
                 <>
-                  Drop files here or <span className="text-verdigris font-medium">browse</span>
+                  Drop files here or <span className="font-medium underline underline-offset-4">browse</span>
                 </>
               )}
             </p>
@@ -109,7 +110,12 @@ export default function KnowledgeBase() {
             <FileIcon type={name} size={20} />
             <span className="text-sm flex-1 truncate">{name}</span>
             {status === "processing" ? (
-              <span className="shimmer rounded-full h-2 w-28" aria-label="indexing" />
+              <span className="flex items-center gap-3">
+                <Chunking3D size={26} />
+                <span className="font-mono text-[11px] text-ink-muted">
+                  chunking & indexing…
+                </span>
+              </span>
             ) : (
               <span
                 className={`font-mono text-[12px] ${

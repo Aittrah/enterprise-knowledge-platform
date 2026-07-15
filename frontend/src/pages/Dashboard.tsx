@@ -41,7 +41,7 @@ export default function Dashboard() {
           {conversations.length === 0 ? (
             <p className="text-ink-muted text-sm">
               None yet —{" "}
-              <Link to="/chat" className="focusable text-verdigris">
+              <Link to="/chat" className="focusable text-ink underline underline-offset-4">
                 start your first chat
               </Link>
               .
