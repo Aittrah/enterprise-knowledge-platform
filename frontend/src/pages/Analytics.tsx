@@ -81,7 +81,7 @@ export default function Analytics() {
                     color: "var(--color-ink)",
                   }}
                 />
-                <Bar dataKey="queries" fill="var(--color-verdigris)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="queries" fill="var(--color-ink)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

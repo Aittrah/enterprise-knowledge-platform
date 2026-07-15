@@ -72,7 +72,7 @@ export function FileIcon({
 
 /** Large outline document used in the upload zone. */
 export function UploadDocGlyph({ active }: { active: boolean }) {
-  const stroke = active ? "var(--color-verdigris)" : "var(--color-ink-muted)";
+  const stroke = active ? "var(--color-ink)" : "var(--color-ink-muted)";
   return (
     <svg
       width="64"
@@ -94,10 +94,10 @@ export function UploadDocGlyph({ active }: { active: boolean }) {
       <line x1="18" y1="54" x2="36" y2="54" stroke={stroke} strokeWidth="2" strokeLinecap="round" />
       {/* upward arrow */}
       <g transform="translate(32, 66)">
-        <circle r="9" fill={active ? "var(--color-verdigris)" : "var(--color-surface-2)"} />
+        <circle r="9" fill={active ? "var(--color-ink)" : "var(--color-surface-2)"} />
         <path
           d="M0 4 V-4 M-3.5 -0.5 L0 -4 L3.5 -0.5"
-          stroke={active ? "#fff" : stroke}
+          stroke={active ? "var(--color-surface-0)" : stroke}
           strokeWidth="2"
           strokeLinecap="round"
           fill="none"

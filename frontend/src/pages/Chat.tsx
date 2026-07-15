@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AgentInfo, api, chatSocket, Citation } from "../lib/api";
 import { AnswerText, Seal } from "../components/ui";
+import { DetailsTree } from "../components/DetailsTree";
 
 interface Message {
   role: "user" | "assistant";
@@ -162,7 +163,7 @@ export default function Chat() {
           {messages.map((message, index) =>
             message.role === "user" ? (
               <div key={index} className="flex justify-end anim-fade-up">
-                <div className="bg-verdigris-soft border border-edge rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] text-[15px]">
+                <div className="bg-accent-soft border border-edge rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] text-[15px]">
                   {message.text}
                 </div>
               </div>
@@ -183,17 +184,28 @@ export default function Chat() {
                     <span className="text-ink-muted animate-pulse">thinking…</span>
                   )}
                   {message.streaming && message.text && (
-                    <span className="inline-block w-2 h-4 bg-verdigris ml-1 animate-pulse" />
+                    <span className="inline-block w-2 h-4 bg-ink ml-1 animate-pulse" />
                   )}
                 </div>
                 {message.role === "assistant" && !message.streaming && message.text && (
-                  <button
-                    className="focusable text-[11px] text-ink-muted hover:text-ink mt-1.5"
-                    onClick={() => navigator.clipboard.writeText(message.text)}
-                  >
-                    Copy answer
-                  </button>
+                  <div className="mt-1.5 flex items-start gap-4">
+                    <button
+                      className="focusable text-[11px] text-ink-muted hover:text-ink py-1"
+                      onClick={() => navigator.clipboard.writeText(message.text)}
+                    >
+                      Copy answer
+                    </button>
+                  </div>
                 )}
+                {message.role === "assistant" &&
+                  !message.streaming &&
+                  (message.citations?.length ?? 0) > 0 && (
+                    <DetailsTree
+                      agentId={message.agentId}
+                      grounded={message.grounded}
+                      citations={message.citations!}
+                    />
+                  )}
               </div>
             ),
           )}

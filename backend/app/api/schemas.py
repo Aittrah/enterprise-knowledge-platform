@@ -50,6 +50,7 @@ class CitationOut(BaseModel):
     chunk_id: str
     heading_path: list[str] = []
     score: float
+    excerpt: str = ""
 
 
 class ChatOut(BaseModel):

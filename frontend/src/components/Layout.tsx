@@ -42,7 +42,7 @@ export function Layout() {
               className={({ isActive }) =>
                 `focusable flex items-center gap-3 px-5 py-2.5 text-sm transition-all ${
                   isActive
-                    ? "text-verdigris bg-verdigris-soft border-r-2 border-verdigris font-medium"
+                    ? "text-ink bg-accent-soft border-r-2 border-ink font-medium"
                     : "text-ink-muted hover:text-ink hover:bg-hover"
                 }`
               }
