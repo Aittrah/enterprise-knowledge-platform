@@ -73,6 +73,11 @@ export class ApiError extends Error {
   }
 }
 
+// When deployed (e.g. frontend on Vercel, backend on a container host), set
+// VITE_API_BASE to the backend origin. Empty default = same-origin, which is
+// what the local dev proxy and the docker/nginx setup both rely on.
+export const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "");
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = useSession.getState().token;
   const headers: Record<string, string> = {
@@ -82,7 +87,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   if (options.body && typeof options.body === "string") {
     headers["Content-Type"] = "application/json";
   }
-  const response = await fetch(path, { ...options, headers });
+  const response = await fetch(`${API_BASE}${path}`, { ...options, headers });
   if (response.status === 401 && token) {
     useSession.getState().clear();
   }
@@ -155,8 +160,11 @@ export const api = {
 
 export function chatSocket(): WebSocket {
   const token = useSession.getState().token ?? "";
-  const protocol = location.protocol === "https:" ? "wss" : "ws";
+  // Derive the WS origin from API_BASE when the backend is on another host,
+  // otherwise fall back to the page origin (dev proxy / nginx).
+  const base = API_BASE || location.origin;
+  const wsBase = base.replace(/^http/, "ws");
   return new WebSocket(
-    `${protocol}://${location.host}/api/chat/ws?token=${encodeURIComponent(token)}`,
+    `${wsBase}/api/chat/ws?token=${encodeURIComponent(token)}`,
   );
 }
