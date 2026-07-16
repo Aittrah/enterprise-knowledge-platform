@@ -17,6 +17,7 @@ dist/
 node_modules/
 frontend/dist/
 frontend/build/
+frontend/public/widget/
 
 # data & artifacts
 data/

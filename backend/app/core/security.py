@@ -50,3 +50,17 @@ def decode_access_token(token: str, secret: str) -> dict:
         return jwt.decode(token, secret, algorithms=["HS256"])
     except jwt.PyJWTError as exc:
         raise TokenError(f"invalid token: {exc}") from exc
+
+
+def create_widget_token(user_id: int, kid: str, secret: str) -> str:
+    """A long-lived, narrowly-scoped token meant to be embedded in public
+    HTML on a third-party site. It carries no email/role and is rejected by
+    every dashboard endpoint (see deps.get_current_user) — it can only open
+    the widget chat socket, and only while its `kid` is not revoked."""
+    payload = {
+        "sub": str(user_id),
+        "scope": "widget",
+        "kid": kid,
+        "exp": datetime.now(timezone.utc) + timedelta(days=3650),
+    }
+    return jwt.encode(payload, secret, algorithm="HS256")

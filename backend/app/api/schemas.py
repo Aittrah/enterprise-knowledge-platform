@@ -86,3 +86,18 @@ class SearchOut(BaseModel):
     elapsed_ms: float
     hits: list[SearchHitOut]
     debug: dict
+
+
+class CreateWidgetKeyIn(BaseModel):
+    label: str = Field(default="Website widget", max_length=80)
+
+
+class WidgetKeyOut(BaseModel):
+    kid: str
+    label: str
+    created_at: str
+    revoked: bool
+
+
+class WidgetKeyCreatedOut(WidgetKeyOut):
+    token: str  # shown once — never retrievable again

@@ -64,6 +64,17 @@ export interface GraphViz {
   edges: { source: string; target: string; type: string; evidence: string }[];
 }
 
+export interface WidgetKey {
+  kid: string;
+  label: string;
+  created_at: string;
+  revoked: boolean;
+}
+
+export interface WidgetKeyCreated extends WidgetKey {
+  token: string;
+}
+
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -156,6 +167,15 @@ export const api = {
 
   graphViz: () => request<GraphViz>("/api/graph/viz"),
   analytics: () => request<AnalyticsSummary>("/api/analytics/summary"),
+
+  widgetKeys: () => request<WidgetKey[]>("/api/widget-keys"),
+  createWidgetKey: (label: string) =>
+    request<WidgetKeyCreated>("/api/widget-keys", {
+      method: "POST",
+      body: JSON.stringify({ label }),
+    }),
+  revokeWidgetKey: (kid: string) =>
+    request<void>(`/api/widget-keys/${kid}`, { method: "DELETE" }),
 };
 
 export function chatSocket(): WebSocket {

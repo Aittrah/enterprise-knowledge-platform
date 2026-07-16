@@ -26,6 +26,10 @@ def get_current_user(
         payload = decode_access_token(
             credentials.credentials, state.settings.jwt_secret
         )
+        # Widget keys are embedded in public third-party HTML — they must
+        # never unlock dashboard endpoints (documents, admin, profile, ...).
+        if payload.get("scope") == "widget":
+            raise TokenError("widget-scoped tokens cannot access dashboard endpoints")
         return state.users.get(int(payload["sub"]))
     except (TokenError, KeyError, ValueError):
         raise HTTPException(status_code=401, detail="Invalid or expired token") from None
