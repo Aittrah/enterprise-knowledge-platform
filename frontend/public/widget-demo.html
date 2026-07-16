@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Acme Corp — a completely unrelated website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+        max-width: 720px;
+        margin: 60px auto;
+        padding: 0 24px;
+        color: #222;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .badge {
+        display: inline-block;
+        background: #eee;
+        border-radius: 6px;
+        padding: 2px 8px;
+        font-size: 12px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Acme Corp</h1>
+    <p class="badge">this page has nothing to do with EKIP's design system</p>
+    <p>
+      This is a plain demo page standing in for any third-party website. The
+      floating chat bubble in the corner is the entire integration — added
+      with one <code>&lt;script&gt;</code> tag below, no build step, no
+      framework required on this page.
+    </p>
+    <p>
+      Replace <code>data-api</code> and <code>data-key</code> with the values
+      from your own EKIP instance's <strong>Settings → Embed widget</strong>
+      screen.
+    </p>
+
+    <!--
+      EKIP embeddable widget — the whole integration is this one tag.
+      During local development the widget bundle is served by Vite from
+      /widget/ekip-widget.js once `npm run build:widget` has run.
+    -->
+    <script
+      src="/widget/ekip-widget.js"
+      data-api="http://localhost:8000"
+      data-key="REPLACE_WITH_A_WIDGET_KEY_FROM_SETTINGS"
+      data-title="Ask Acme's docs"
+      async
+    ></script>
+  </body>
+</html>

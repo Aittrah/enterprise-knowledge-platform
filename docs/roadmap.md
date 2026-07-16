@@ -38,6 +38,12 @@ Every milestone gets its own feature branch, one major feature, unit tests, upda
 ## Phase 7 — Security
 - [x] **M20 AI Guardrails** — injection/jailbreak detection, PII, citation verification, groundedness → `docs/20-ai-guardrails.md`
 
+## Milestone 26 (added, user-requested) — Embeddable Chat Widget
+- [x] Scoped, revocable widget keys (SQLite, dashboard rejects widget scope and vice versa) → `docs/26-embeddable-widget.md`
+- [x] Framework-free vanilla-TS widget bundle (Shadow DOM, ~7.7 KB), one-line `<script>` embed
+- [x] Settings UI: generate / list / revoke keys with copy-paste snippet
+- [x] `frontend/public/widget-demo.html` proving the embed on an unrelated page
+
 ## Module 21 (added) — UI/UX Design Review & Professional Interface Enhancement
 - [ ] Design system + tokens → `docs/design/design-system.md`
 - [ ] Wireframe reviews per screen (approval-gated before implementation)

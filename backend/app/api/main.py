@@ -14,7 +14,7 @@ import time
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routers import analytics, auth, chat, documents, graph, monitoring, search
+from app.api.routers import analytics, auth, chat, documents, graph, monitoring, search, widget
 from app.api.state import AppState
 from app.core.config import Settings
 from app.observability import configure_logging
@@ -39,7 +39,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         allow_headers=["*"],
     )
 
-    for router in (auth, documents, chat, search, graph, analytics, monitoring):
+    for router in (auth, documents, chat, search, graph, analytics, monitoring, widget):
         app.include_router(router.router, prefix="/api")
 
     @app.middleware("http")

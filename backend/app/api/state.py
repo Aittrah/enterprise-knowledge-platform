@@ -19,6 +19,7 @@ from app.guardrails import GuardrailPipeline
 from app.guardrails.pipeline import REFUSAL_TEXT, input_verdict_dict
 from app.api.fallback import ExtractiveLLM
 from app.api.users import UserStore
+from app.api.widget_keys import WidgetKeyStore
 from app.core.config import Settings
 from app.embeddings import EmbeddingService, create_provider
 from app.graph import GraphBuilder, InMemoryGraphStore
@@ -42,6 +43,7 @@ class AppState:
         self.upload_dir.mkdir(exist_ok=True)
 
         self.users = UserStore(data / "users.db")
+        self.widget_keys = WidgetKeyStore(data / "widget_keys.db")
         self.memory = MemoryService(data / "memory.db")
 
         self.embeddings = EmbeddingService(
