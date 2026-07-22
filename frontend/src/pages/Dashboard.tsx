@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnalyticsSummary, api } from "../lib/api";
 import { PageHeader, StatCard } from "../components/ui";
+import RagPipeline from "../components/RagPipeline";
 import { useSession } from "../stores/session";
 
 export default function Dashboard() {
@@ -32,6 +33,9 @@ export default function Dashboard() {
           value={summary ? summary.prompt_tokens + summary.completion_tokens : "—"}
           hint={summary ? `LLM: ${summary.providers.llm}` : undefined}
         />
+      </div>
+      <div className="px-8 mt-6 stagger">
+        <RagPipeline />
       </div>
       <div className="px-8 mt-6 grid lg:grid-cols-2 gap-4 stagger">
         <section className="card p-5">

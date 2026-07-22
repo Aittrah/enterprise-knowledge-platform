@@ -306,3 +306,163 @@ body {
     transform: none;
   }
 }
+
+/* ---------- RAG pipeline showcase ---------- */
+.rag-pipeline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0;
+  padding: 8px 4px 22px;
+  flex-wrap: wrap;
+}
+.rag-stage-wrap {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.rag-stage {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 10px 10px;
+  min-width: 88px;
+  border-radius: 12px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-edge);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.rag-stage:hover { border-color: var(--color-verdigris); color: var(--color-ink); }
+
+.rag-stage.done {
+  border-color: color-mix(in srgb, var(--color-verdigris) 40%, var(--color-edge));
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-verdigris-soft) 60%, var(--color-surface-2));
+}
+.rag-stage.active {
+  border-color: var(--color-verdigris);
+  color: var(--color-ink);
+  background: var(--color-verdigris-soft);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-verdigris) 25%, transparent),
+              0 8px 24px color-mix(in srgb, var(--color-verdigris) 20%, transparent);
+}
+.rag-stage-icon { font-size: 24px; line-height: 1; }
+.rag-stage-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.rag-stage-sub {
+  font-size: 10px;
+  color: var(--color-ink-muted);
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
+}
+.rag-stage.active .rag-stage-sub { color: var(--color-verdigris-bright); }
+
+.rag-stage-ping {
+  position: absolute;
+  inset: -6px;
+  border-radius: 14px;
+  border: 2px solid var(--color-verdigris);
+  opacity: 0;
+  animation: ragPing 1.6s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes ragPing {
+  0%   { opacity: 0.7; transform: scale(0.94); }
+  100% { opacity: 0;   transform: scale(1.25); }
+}
+
+.rag-connector {
+  flex: 1 1 auto;
+  position: relative;
+  height: 2px;
+  margin: 0 6px;
+  background: linear-gradient(90deg, var(--color-edge) 50%, transparent 50%) 0 0 / 8px 2px repeat-x;
+  min-width: 20px;
+}
+.rag-connector.flowed {
+  background: linear-gradient(90deg, var(--color-verdigris) 0%, var(--color-verdigris) 100%);
+}
+.rag-particle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-verdigris-bright);
+  box-shadow: 0 0 12px var(--color-verdigris),
+              0 0 24px color-mix(in srgb, var(--color-verdigris) 40%, transparent);
+  transform: translate(-50%, -50%);
+  animation: ragParticle 1.8s linear infinite;
+}
+@keyframes ragParticle {
+  0%   { left: 0%;  opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+.rag-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-verdigris);
+  box-shadow: 0 0 10px var(--color-verdigris);
+  animation: ragLive 1.4s ease-in-out infinite;
+}
+@keyframes ragLive {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.7); }
+}
+
+.rag-readout {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--color-surface-2);
+  border: 1px dashed color-mix(in srgb, var(--color-verdigris) 35%, var(--color-edge));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: ragReadout 0.5s ease;
+}
+@keyframes ragReadout {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rag-readout-tag {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-verdigris-bright);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--color-verdigris-soft);
+  border: 1px solid color-mix(in srgb, var(--color-verdigris) 40%, transparent);
+}
+.rag-readout-line {
+  font-family: ui-monospace, "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .rag-pipeline { justify-content: center; gap: 8px 4px; }
+  .rag-stage { min-width: 72px; padding: 10px 6px 8px; }
+  .rag-stage-sub { display: none; }
+  .rag-connector { display: none; }
+}
